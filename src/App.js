@@ -16,6 +16,7 @@ export default function App() {
 
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && hasMore) {
+        console.log('IntersectionObserver: Fetching next page');
         setPageNumber(prevPageNumber => prevPageNumber + 1);
       }
     });
@@ -26,6 +27,7 @@ export default function App() {
   function handleSearch(e) {
     setQuery(e.target.value);
     setPageNumber(1);
+    console.log('Search query:', e.target.value);
   }
 
   function getClassByRate(vote) {
@@ -43,6 +45,7 @@ export default function App() {
       </header>
       <main className="main">{movies.map((movie, index) => {
         if (movies.length === index + 1) {
+          console.log('Last movie element:', movie.title);
           return (
             <div ref={lastMovieElementRef} key={movie.id} className="movie">
               <img src={IMG_PATH + movie.poster_path} alt={movie.title} />
